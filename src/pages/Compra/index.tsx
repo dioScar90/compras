@@ -10,12 +10,10 @@ export const loader = ({ params }: LoaderFunctionArgs) => {
   return { id }
 }
 
-const Compra = () => {
+export const Compra = () => {
   const { id } = useLoaderData() as { id: string }
   
   return (
     <div>id: {id}</div>
   )
 }
-
-export default Compra
