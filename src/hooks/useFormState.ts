@@ -46,6 +46,9 @@ function getActionType<Schema extends z.AnyZodObject>(schema: Schema) {
   return keyof z.infer<typeof schema>
 }
 
+const fruit = ["apple", "banana", "grape"] as const;
+type Fruit = (typeof fruit)[number];
+
 export function useFormState<Schema extends z.AnyZodObject>(schema: Schema) {
   const reducer = useCallback((state: z.infer<typeof schema>, action: getActionType) => {
     switch (action.type) {

@@ -12,6 +12,20 @@ const schema = z.object({
   }),
 });
 
+
+type KeyInfer = keyof z.infer<typeof schema>
+type KeyTwo<T, P extends string> = z.infer<typeof schema> extends PropertyKey ?  keyof z.infer<typeof schema> : undefined
+
+type SchemaKeys = keyof typeof schema.shape
+  | typeof schema.shape.address.shape extends z.AnyZodObject ? keyof typeof schema.shape.address.shape : never
+type GetEnumsOfSchema<T> = T extends string ? `change_${T}` : undefined
+
+type Schhhh<T, B extends string | undefined> = T extends z.AnyZodObject
+  ? keyof typeof T | B extends string ? keyof typeof T.shape[B] : never
+  : never
+
+type OhGloria = GetEnumsOfSchema<SchemaKeys>
+
 type Join<K, P> = K extends string | number ? 
   P extends string | number ? 
   `${K}.${P}` : never : never;
